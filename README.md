@@ -20,7 +20,7 @@
 - Can 'hold' to play it safe and skip your turn.
 - Rather then closest to 21, it's first to reach 100
 
-**GOOD LUCK!**
+**GOOD LUCK!** :)
 
 ---
 
