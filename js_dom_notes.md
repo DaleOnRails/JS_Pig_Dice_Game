@@ -2,19 +2,19 @@
 
 ## SHORT VERSION
 
-- HTML content is stored in the DOM. 
+- HTML content is stored in the DOM.
 
-- The DOM is an interface that allows JS to interact with the webpage (HTML code). 
+- The DOM is an interface that allows JS to interact with the webpage (HTML code).
 
 - JS interacts with the DOM using special methods (DOM methods).
 
 ## LONG VERSION
 
-### WHAT IS DOM MANIPULATION?
+### WHAT IS DOM MANIPULATION
 
 - DOM manipulation simply refers to getting JS code to interact with the browser (HTML)
 
-### WHAT IS THE DOM (Document Object Model)?
+### WHAT IS THE DOM (Document Object Model)
 
 - Used to connect webpages to scripts such as JAVASCRIPT
 
