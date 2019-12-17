@@ -10,7 +10,7 @@ score 1 = 0;
 score 2 = 0;
 But to keep code DRY will store scores in an array instead...
 */
-var scores, roundScores, activePlayer, dice;
+var scores, roundScores, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
@@ -31,8 +31,8 @@ activePlayer = 0;
 // = Math.floor(Math.random) + 1
 //-----------------------------------------------------------------------------------------------------------
 
-dice = Math.floor(Math.random() * 6) + 1;
-console.log(dice);
+// dice = Math.floor(Math.random() * 6) + 1;
+// console.log(dice);
 
 
 // DOM MANIPULATION 1  ----SETTER----
@@ -53,7 +53,7 @@ console.log(dice);
 
 // 'current-0' only assigns value to 1st player though, to write it more dynamcally so that value is assigned to BOTH players (depending who is activePlayer) I can do:
 
-document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).textContent = dice;
 
 //-----------------------------------------------------------------------------------------------------------
 // 'textContent' method only uses plain text. IF i wanted to style it up with HTML i could use 'innerHTML' method instead
@@ -71,7 +71,7 @@ document.querySelector('#current-' + activePlayer).textContent = dice;
 
 // READS whatever textContent is inside of the HTML div '#score-0' and STORES it inside of 'var x'
 var x = document.querySelector('#score-0').textContent;
-console.log(x);
+// console.log(x);
 //-----------------------------------------------------------------------------------------------------------
 
 
@@ -84,10 +84,94 @@ console.log(x);
 // --------------------- styleMethod => CSSproperty => CSSattribute
 document.querySelector('.dice').style.display = 'none';
 
+// Sets initial scores to 0 at game start.
+document.getElementById("score-0").textContent = "0";
+document.getElementById("score-1").textContent = "0";
+document.getElementById("current-0").textContent = "0";
+document.getElementById("current-1").textContent = "0";
+
+// SETTING UP AN EVENT HANDLER & CALLBACK FUNCTIONS:-
+//=========================================
+//=========================================
+
+// function btn() {
+//     //Do something here
+// }
+// btn();
+
+// addEventListener takes two arguments: 1.The event listener 'click' 2. The event (function to call when event listener triggers)
+// CALLBACK FUNCTION: all it is, is just a function that is called from another function like below.
+
+// document.querySelector('.btn-roll').addEventListener('click', btn)
+
+// -------------------
+
+// ANONYMOUS-FUNCTION: a function without a name. It is written inside of a context and can't be called from outside of that context. 
+// - Use anonymous functions for event listners. (When you only need to use it once)
+// E.g below: Function written inside of the event listener:
+document.querySelector(".btn-roll").addEventListener("click", function() {
+    // 1. Random Number
+    var dice = Math.floor(Math.random() * 6) + 1;
+    //2. Display dice img depending on number generated.
+    // Stores the 'dice image' DOM element in variable so only have to query select it ONCE. Can just 'diceDOM' after that.
+    var diceDOM = document.querySelector(".dice");
+    diceDOM.style.display = "block";
+    // GREAT TRICK FOR DYNAMICALLY DISPLAYING IMAGES :-
+    // Images are named all same but with diff' numbers. Therefore below calls for image depending on what number is rolled (1 - 6) which can then match the same name as a picture (named dice-1 to dice-6)
+    diceDOM.src = 'dice-' + dice + '.png'
+    //3. Update round score IF the rolled number was NOT a 1 (cause' if 1 it is 'bust' & next players turn.)
+    if (dice !== 1) {
+        // Add score
+        // same as roundScore = roundScore + dice
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    } else {
+        // Next Player
+        nextPlayer()
+    }
+});
+
+// Implementing the 'HOLD' Feature
+
+document.querySelector('.btn-hold').addEventListener('click', function() {
+    // Add roundScore to globalScore
+    // scores array is [0,0]. elements 0 & 1 cause' of 0 index counting. Therefore can use active 'activePlayer' to select the index in the array. Once selected it then adds the 'roundScore' to the array.
+    scores[activePlayer] += roundScore;
+
+    // Update the UI
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+    // Check if player won the game
+    if (scores[activePlayer] >= 20) {
+        document.querySelector("#name-" + activePlayer).textContent = 'Winner!'
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+
+    } else {
+        nextPlayer()
+    }
+})
 
 
+function nextPlayer() {
+    // Next Player
+    // If activePlayer = 0 then change activePlayer to 1 - and vicaversa
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0;
 
+    // Erase roundScore to 0 if player rolls a 1:
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById("current-1").textContent = "0";
 
+    // Used 'toggle' method to add 'active' class if not there but if it IS there then remove it.
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    // document.querySelector('.player-0-panel').classList.remove('active');
+    // document.querySelector('.player-1-panel').classList.add('active');
+
+    // If '1' is rolled then remove dice img until player clicks 'roll' again.
+    document.querySelector('.dice').style.display = 'none';
+}
 
 
 
