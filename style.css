@@ -2,6 +2,28 @@
 *** GENERAL
 **********************************************/
 
+.final-score {
+    position:  absolute;
+    left: 50%;
+    /* Great trick for centering a object to center of page!!! */
+    transform: translateX(-50%);
+    top: 520px;
+    color: #555;
+    font-size: 18px;
+    font-family: 'Lato';
+    text-align: center;
+    padding: 10px;
+    width: 160px;
+    text-transform: uppercase;
+}
+
+/* Removes the default blue focus outline when box is clicked */
+.final-score:focus { outline: none;}
+
+/* Center and align both dices */
+#dice-1 { top: 120px }
+#dice-2 { top: 250px }
+
 * {
     margin: 0;
     padding: 0;

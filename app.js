@@ -139,7 +139,6 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
 });
 
 // Implementing the 'HOLD' Feature
-
 document.querySelector('.btn-hold').addEventListener('click', function() {
     if (gamePlaying) {
         // Add roundScore to globalScore
