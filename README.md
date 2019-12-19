@@ -47,4 +47,10 @@
 ---
 # Screenshots
 
+![readme doc screenshot](img/dice_game_screenshot_1.png)
 
+![readme doc screenshot](img/dice_game_screenshot_2.png)
+
+![readme doc screenshot](img/dice_game_screenshot_3.png)
+
+![readme doc screenshot](img/dice_game_screenshot_4.png)
