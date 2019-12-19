@@ -1,6 +1,21 @@
 # JavaScript PIG Dice Game
 
-## How To Play
+## User Instructions - How to set up the game on your local computer
+
+*Basic coding knowledge is assumed*
+1. Download or clone this repository to your computer.
+2. Open the code in your IDE (Text Editor).
+3. Run the code in your browser with your IDE's live server.
+
+**Changing Game Modes**
+
+*By default the 'hard mode' script is pre-loaded*
+- The code has three different scripts for three different game modes.
+- Standard Mode (app.js), Hard Mode (hard_mode.js) & Double Dice Mode (double_dice_mode.js).
+- To change the game mode you only need to specify which script to load in the HTML.
+
+## How To Play - Standard Mode
+*Input field for creating a custom final score is disabled in standard mode*
 
 **Goal of the game:**
 
@@ -14,11 +29,15 @@
 - The player can choose to 'Hold' however, which means that his ROUND score gets added to his GLOBAL score. After which, it's the next player's turn.
 - The first player to reach a global score of 100 points wins the game!!!
 
-**To summarize, it's basically the same as blackjack - but with dice:**
+*Once a player reaches the winning score the game will end & the 'New Game' button at the top must be clicked to play again!*
 
-- If a '1' is rolled the score is a bust.
-- Can 'hold' to play it safe and skip your turn.
-- Rather then closest to 21, it's first to reach 100
+## Hard Mode
+
+**Exact same as standard mode except for one extra rule:**
+- If two 6's are rolled in a row the player loses not just his current round score but his ENTIRE accumulated score
+- Hard Mode also features a 'final score' input box where players can choose a custom winning score rather then the default winning score of 100.
+
+**DON'T GET TO GREEDY!** :o
 
 **GOOD LUCK!** :)
 
