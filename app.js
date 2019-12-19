@@ -1,8 +1,6 @@
 // CREATING FUNDAMENTAL GAME VARIABLES:
 //=========================================
 //=========================================
-
-
 // Creating the fundamental variables of the game - Keeps track of scores:
 /*
 - Could write:
@@ -10,13 +8,18 @@ score 1 = 0;
 score 2 = 0;
 But to keep code DRY will store scores in an array instead...
 */
-var scores, roundScores, activePlayer;
+// 'gamePlaying' is a STATE variable. By default it is set to true. I can use this state variable to tell code to go to work if my game is in playing state or finished / end-of-game state!
+var scores, roundScores, activePlayer, gamePlaying;
 
-scores = [0,0];
-roundScore = 0;
-// Keeps track of current player so code knows who to assign score to. 0 = 1st player | 1 = 2nd player
-// Will use 'activePlayer' var to assign values to 'scores' var
-activePlayer = 0;
+init();
+
+// Goes in 'Init' function at bottom of code.
+
+// scores = [0,0];
+// roundScore = 0;
+// // Keeps track of current player so code knows who to assign score to. 0 = 1st player | 1 = 2nd player
+// // Will use 'activePlayer' var to assign values to 'scores' var
+// activePlayer = 0;
 
 
 // GENERATING A RANDOM NUMBER FOR DICE
@@ -70,7 +73,7 @@ activePlayer = 0;
 // Can also read DOM elements for the purpose of storing them in a variable!
 
 // READS whatever textContent is inside of the HTML div '#score-0' and STORES it inside of 'var x'
-var x = document.querySelector('#score-0').textContent;
+// var x = document.querySelector('#score-0').textContent;
 // console.log(x);
 //-----------------------------------------------------------------------------------------------------------
 
@@ -82,13 +85,13 @@ var x = document.querySelector('#score-0').textContent;
 // Selects 'dice' html class
 
 // --------------------- styleMethod => CSSproperty => CSSattribute
-document.querySelector('.dice').style.display = 'none';
+// document.querySelector('.dice').style.display = 'none';
 
-// Sets initial scores to 0 at game start.
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
+// // Sets initial scores to 0 at game start.
+// document.getElementById("score-0").textContent = "0";
+// document.getElementById("score-1").textContent = "0";
+// document.getElementById("current-0").textContent = "0";
+// document.getElementById("current-1").textContent = "0";
 
 // SETTING UP AN EVENT HANDLER & CALLBACK FUNCTIONS:-
 //=========================================
@@ -110,47 +113,52 @@ document.getElementById("current-1").textContent = "0";
 // - Use anonymous functions for event listners. (When you only need to use it once)
 // E.g below: Function written inside of the event listener:
 document.querySelector(".btn-roll").addEventListener("click", function() {
-    // 1. Random Number
-    var dice = Math.floor(Math.random() * 6) + 1;
-    //2. Display dice img depending on number generated.
-    // Stores the 'dice image' DOM element in variable so only have to query select it ONCE. Can just 'diceDOM' after that.
-    var diceDOM = document.querySelector(".dice");
-    diceDOM.style.display = "block";
-    // GREAT TRICK FOR DYNAMICALLY DISPLAYING IMAGES :-
-    // Images are named all same but with diff' numbers. Therefore below calls for image depending on what number is rolled (1 - 6) which can then match the same name as a picture (named dice-1 to dice-6)
-    diceDOM.src = 'dice-' + dice + '.png'
-    //3. Update round score IF the rolled number was NOT a 1 (cause' if 1 it is 'bust' & next players turn.)
-    if (dice !== 1) {
-        // Add score
-        // same as roundScore = roundScore + dice
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    } else {
-        // Next Player
-        nextPlayer()
+    // STATE-VARIABLE
+    // IF game is playing then do code inside this 'if' block
+    if (gamePlaying) {
+        // 1. Random Number
+        var dice = Math.floor(Math.random() * 6) + 1;
+        //2. Display dice img depending on number generated.
+        // Stores the 'dice image' DOM element in variable so only have to query select it ONCE. Can just 'diceDOM' after that.
+        var diceDOM = document.querySelector(".dice");
+        diceDOM.style.display = "block";
+        // GREAT TRICK FOR DYNAMICALLY DISPLAYING IMAGES :-
+        // Images are named all same but with diff' numbers. Therefore below calls for image depending on what number is rolled (1 - 6) which can then match the same name as a picture (named dice-1 to dice-6)
+        diceDOM.src = 'dice-' + dice + '.png'
+        //3. Update round score IF the rolled number was NOT a 1 (cause' if 1 it is 'bust' & next players turn.)
+        if (dice !== 1) {
+            // Add score
+            // same as roundScore = roundScore + dice
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        } else {
+            // Next Player
+            nextPlayer();
+        }
     }
 });
 
 // Implementing the 'HOLD' Feature
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
-    // Add roundScore to globalScore
-    // scores array is [0,0]. elements 0 & 1 cause' of 0 index counting. Therefore can use active 'activePlayer' to select the index in the array. Once selected it then adds the 'roundScore' to the array.
-    scores[activePlayer] += roundScore;
-
-    // Update the UI
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
-    // Check if player won the game
-    if (scores[activePlayer] >= 20) {
-        document.querySelector("#name-" + activePlayer).textContent = 'Winner!'
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-
-    } else {
-        nextPlayer()
+    if (gamePlaying) {
+        // Add roundScore to globalScore
+        // scores array is [0,0]. elements 0 & 1 cause' of 0 index counting. Therefore can use active 'activePlayer' to select the index in the array. Once selected it then adds the 'roundScore' to the array.
+        scores[activePlayer] += roundScore;
+        // Update the UI
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+        // Check if player won the game
+        if (scores[activePlayer] >= 100) {
+            document.querySelector("#name-" + activePlayer).textContent = 'Winner!'
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            gamePlaying = false;
+        } else {
+            nextPlayer();
+        }
     }
-})
+});
 
 
 function nextPlayer() {
@@ -173,9 +181,33 @@ function nextPlayer() {
     document.querySelector('.dice').style.display = 'none';
 }
 
+// New Game - has 'init' function passed into it
+document.querySelector('.btn-new').addEventListener('click', init);
 
+function init() {
+    scores = [0, 0];
+    activePlayer = 0;
+    roundScore = 0;
+    gamePlaying = true;
 
-
+    document.querySelector(".dice").style.display = "none";
+    // Sets initial scores to 0 at game start.
+    document.getElementById("score-0").textContent = "0";
+    document.getElementById("score-1").textContent = "0";
+    document.getElementById("current-0").textContent = "0";
+    document.getElementById("current-1").textContent = "0";
+    // Sets default names
+    document.getElementById("name-0").textContent = 'Player 1';
+    document.getElementById("name-1").textContent = "Player 2";
+    // Removes 'winner' class from previous game
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector(".player-1-panel").classList.remove("winner");
+    // Removes 'active' class from previous game
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector(".player-1-panel").classList.remove("active");
+    // Finally, add 'active' class back to player 0 as it should be by default
+    document.querySelector(".player-0-panel").classList.add("active");
+}
 
 
 

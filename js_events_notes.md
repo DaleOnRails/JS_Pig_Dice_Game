@@ -19,11 +19,3 @@
 - The events in the message que are only processed once my execution stack has been cleared.
 
 - When an event is ready to be processed the browser engine grabs the event, gives it its own execution context and is placed in the execution stack.
-
-## Callback functions
-
-## Anonymous Functions
-
-## Another way to select DOM elements by ID
-
-## How to change the image in an < img > element via DOM
