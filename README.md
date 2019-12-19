@@ -6,6 +6,7 @@
 1. Download or clone this repository to your computer.
 2. Open the code in your IDE (Text Editor).
 3. Run the code in your browser with your IDE's live server.
+---
 
 **Changing Game Modes**
 
@@ -13,16 +14,15 @@
 - The code has three different scripts for three different game modes.
 - Standard Mode (app.js), Hard Mode (hard_mode.js) & Double Dice Mode (double_dice_mode.js).
 - To change the game mode you only need to specify which script to load in the HTML.
+---
 
 ## How To Play - Standard Mode
 *Input field for creating a custom final score is disabled in standard mode*
 
 **Goal of the game:**
-
 - First to get a global score of 100 wins.
 
 **Game Rules:**
-
 - The game has 2 players, playing in rounds.
 - In each turn, a player rolls a dice as many times as he wishes. Each result gets added to his **round** score.
 - BUT, if the player rolls a 1, It's a bust & his entire **round** score is wiped! After that, it's the next player's turn.
@@ -39,8 +39,14 @@
 
 **DON'T GET TO GREEDY!** :o
 
-**GOOD LUCK!** :)
+## DOUBLE DICE MODE
 
+- Exact same as standard mode except there are now two dices. If ONE of them rolls a 1, the player loses his current round score.
+- Also has custom winning score feature **enabled.**
+
+**GOOD LUCK!** :)
 ---
 
 ## Screenshots
+
+
