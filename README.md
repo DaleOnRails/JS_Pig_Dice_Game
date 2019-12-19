@@ -1,6 +1,6 @@
 # JavaScript PIG Dice Game
 
-## User Instructions - How to set up the game on your local computer
+**User Instructions - How to set up the game on your local computer**
 
 *Basic coding knowledge is assumed*
 1. Download or clone this repository to your computer.
