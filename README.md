@@ -17,12 +17,9 @@
 ---
 
 ### How To Play - Standard Mode
-*Input field for creating a custom final score is disabled in standard mode*
-
-**Goal of the game:**
-- First to get a global score of 100 wins.
 
 **Game Rules:**
+- Goal of the game: First to get a global score of 100 wins.
 - The game has 2 players, playing in rounds.
 - In each turn, a player rolls a dice as many times as he wishes. Each result gets added to his **round** score.
 - BUT, if the player rolls a 1, It's a bust & his entire **round** score is wiped! After that, it's the next player's turn.
@@ -30,23 +27,24 @@
 - The first player to reach a global score of 100 points wins the game!!!
 
 *Once a player reaches the winning score the game will end & the 'New Game' button at the top must be clicked to play again!*
+*Input field for creating a custom final score is disabled in standard mode*
 
-##### Hard Mode
+### Hard Mode
 
 **Exact same as standard mode except for one extra rule:**
 - If two 6's are rolled in a row the player loses not just his current round score but his ENTIRE accumulated score
 - Hard Mode also features a 'final score' input box where players can choose a custom winning score rather then the default winning score of 100.
 
-**DON'T GET TO GREEDY!** :o
+*DON'T GET TO GREEDY!* :o
 
-##### DOUBLE DICE MODE
+### DOUBLE DICE MODE
 
 - Exact same as standard mode except there are now two dices. If ONE of them rolls a 1, the player loses his current round score.
 - Also has custom winning score feature **enabled.**
 
-**GOOD LUCK!** :)
----
+*GOOD LUCK* :)
 
+---
 # Screenshots
 
 
